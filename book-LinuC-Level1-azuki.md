@@ -1,0 +1,102 @@
+## Linuc レベル1 あずき本
+
+### 第1章 Linuxのインストールと仮想マシン・コンテナの利用
+
+#### 1.1 
+(未)
+
+#### 1.2 仮想マシン・コンテナの概念と利用
+
+
+KVM: Linuxカーネルに標準で組み込まれている仮想化機構  
+CPUが仮想化支援機能に対応している必要あり  
+
+virshコマンド: 仮想マシンとハイパーバイザーの管理  
+virsh list --all: 一覧表示 実行中でないものも含む  
+virsh list: 一覧表示 実行中のもの  
+virsh start (仮想マシン名): 仮想マシンを起動
+virsh shutdown (仮想マシン名): 仮想マシンを停止  
+virsh destroy (仮想マシン名): 強制停止  
+virsh console (仮想マシン名): 仮想マシン内のゲストOSのコンソールに接続 ^\] でホストOSに操作を戻す  
+virsh reboot (仮想マシン名): 再起動  
+virsh suspend (仮想マシン名): 一時停止  
+
+Docker: コンテナ型の仮想化ソフトウェア   
+Dockerイメージを管理するサイトをDockerレジストリと呼ぶ  
+Docker HUBは公式のDockerレジストリ  
+Dockerイメージを取得し、Dockerイメージからコンテナを生成する流れ  
+コンテナでどんな作業をしようとも、Dockerイメージは変化しない  
+
+docker pull イメージ名[:タグ名]: Dockerイメージの取得  
+docker images: ダウンロードしたイメージの一覧  
+docker run イメージ名[:タグ名] コマンド: コンテナを起動し、コマンドを実行  
+　⇒ docker run centos:7 cat /etc /hostname: catコマンドを実行してコンテナ終了  
+docker ps: 動作中のコンテナ一覧  
+docker ps -a: 終了したコンテナも表示  
+docker rm コンテナID: コンテナの削除 コンテナIDは省略記法可能(先頭4文字など)  
+
+docker run -it イメージ名: 起動したコンテナにログイン  
+　⇒-i(--interactive)はコンテナの標準入力に接続  
+　　-t(--tty)は疑似ターミナルを割り当て  
+docker exec: 起動中のコンテナでコマンドを実行  
+
+#### 1.3 ブートプロセスとsystemd
+電源ON  
+⇒BIOS/UEFI  
+　ハードウェアのチェックや初期化  
+　起動デバイスに書き込まれたブートローダーを読み出し、そちらに制御を移行  
+⇒ブートローダー  
+　起動デバイス上からカーネルをメモリ上に読み込む  
+⇒init/systemd  
+
+システム起動時にデフォルトでグラフィカルログインにするかCUIログインにするかを選べる ⇒ systemctl  
+systemctl: 各サービスの稼働状況や起動設定を管理  
+systemctl サブコマンド [ユニット名]  
+　※ユニット名に拡張子が無い場合、 .service の拡張子が指定されたとみなされる  
+get-default: グラフィカルログインかCUIログインかを確認できる  
+set-default: 上記選択できる  
+
+systemdの処理単位をまとめたターゲット:  
+　multi-user.target: CUIログイン  
+　graphical.target: GUIログイン  
+　poweroff.target: システム終了  
+　rescue.target: レスキュー(シングルユーザー)モード  
+　reboot.target: 再起動  
+
+isolate: 他のターゲットを停止し、指定するターゲットを起動  
+systemctl isolate reboot.target: 再起動  
+systemctl isolate rescue.target: レスキューモードで起動  
+
+systemctlのオプション  
+disable, enable: サービスの自動起動を設定  
+halt: システムを停止しhalt状態にする  
+is-active: サービスが稼働しているか表示  
+list-unit-files: Unit定義ファイルを一覧表示  
+restart: サービスを再起動  
+start: サービスを起動  
+status: サービスの状態を表示  
+stop: サービスを停止  
+rescue: レスキューモードに移行  
+
+shutdown [オプション] 時間 [メッセージ]  
+-h: シャットダウン **デフォルトオプション**  
+-r: シャットダウン後に再起動  
+-f: 次回起動時にfsckをスキップ(-h,-rと組み合わせる)  
+-F: 次回起動時にfsckを実行(-h,-rと組み合わせる)  
+-k: 警告メッセージ表示のみ ※systemdを採用したシステムでは通知されないケース有り。この場合はwallコマンドを使うらしい  
+-c: シャットダウンキャンセル  
+時刻は、  
+　+5: 5分後  
+　5: 5分後 ※+はなくてもよい  
+　22:00 : 22時  
+　now: すぐ  
+よって、shutdown 10 は10分後にシャットダウンとなる  
+
+poweroff  
+halt -p  
+もシャットダウン  
+
+reboot は再起動  
+
+#### 1.4 プロセスの生成、監視、終了
+
