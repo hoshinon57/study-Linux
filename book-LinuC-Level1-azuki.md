@@ -3,7 +3,21 @@
 ### 第1章 Linuxのインストールと仮想マシン・コンテナの利用
 
 #### 1.1 
-(未)
+ssh (ユーザ名)@server で接続  
+
+ssh-keygenで、 ~/.ssh ディレクトリに公開鍵と秘密鍵が生成される  
+
+ホスト認証:  
+サーバの正当性を確認  
+サーバが自身の公開鍵をクライアントへ送り、クライアントは受け取った公開鍵と ~/.ssh/known_hosts にある公開鍵と一致するかチェック  
+
+SSHサーバ側の鍵:  
+設定ファイル: /etc/ssh/sshd_config  
+秘密鍵: /etc/ssh/ssh_host_rsa_key  
+公開鍵: /etc/ssh/ssh_host_rsa_key.pub  
+⇒クライアントの ~/.ssh/known_hosts に保存
+
+LinuxではSSHのソフトウェアとして、通常OpenSSHが使われる  
 
 #### 1.2 仮想マシン・コンテナの概念と利用
 KVM: Linuxカーネルに標準で組み込まれている仮想化機構  
@@ -35,6 +49,7 @@ docker run イメージ名[:タグ名] コマンド: コンテナを起動し、
 docker ps: 動作中のコンテナ一覧  
 docker ps -a: 終了したコンテナも表示  
 docker rm コンテナID: コンテナの削除 コンテナIDは省略記法可能(先頭4文字など)  
+※imagesはイメージの一覧、psはコンテナの一覧  
 
 docker run -it イメージ名: 起動したコンテナにログイン  
 　⇒-i(--interactive)はコンテナの標準入力に接続  
@@ -44,6 +59,8 @@ docker start: 既存のコンテナを起動
 docker exec: 起動中のコンテナでコマンドを実行  
 docker stop: 動作中のコンテナを停止  
 docker kill: 強制停止  
+docker attach: コンテナの標準入出力に接続  
+docker login: レジストリにログイン  
 
 仮想マシンのメリット:  
 ・1つの環境で複数のOSを共存できる(逆に、コンテナはCentOS上でWindowsのコンテナを動かすことはできない)  
