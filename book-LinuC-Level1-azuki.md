@@ -134,6 +134,7 @@ start: サービスを起動
 status: サービスの状態を表示  
 stop: サービスを停止  
 rescue: レスキューモードに移行  
+reboot: システム再起動
 
 shutdown [オプション] 時間 [メッセージ]  
 -h: シャットダウン **デフォルトオプション**  
@@ -171,7 +172,7 @@ killall: killコマンドはPIDだが、こちらはプロセス名で指定す�
 pkill: killallと同じようにプロセス名指定でシグナルを送る -U,--uidなどでユーザを指定できる
 
 mycom1, mycom2, mycom3という3つのプロセス名のプロセスがあったとき、  
-killall mycom はダメで、  
+killall mycom はダメで(正確なコマンド名を入力必要)、  
 pkill mycom はOK(3つのプロセスにシグナル送信する)  
 pkillはその文字列を含むプロセスに送るっぽい。  
 
