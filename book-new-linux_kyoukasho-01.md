@@ -446,12 +446,14 @@ type <コマンド> で判別できる
 例えばLANGは環境変数。(catコマンドはLANGによってメッセージが変わる)  
 
 printenv: 環境変数の表示  
+printenv (環境変数): 指定した環境変数の値を表示  
 
 export <シェル変数名>: 指定したシェル変数を環境変数にする  
 LESS='--no-init'  
 export LESS  
 もしくは、  
 export LESS='--no-init'  
+declare -x <シェル変数名> も同様  
 
 #### bashの設定ファイル
 今後ログインしなおしたときにも同じ設定になるようにするには、bashの設定ファイルに記述する。  
