@@ -155,6 +155,10 @@ halt -p
 もシャットダウン  
 
 reboot は再起動  
+今すぐ再起動させるコマンド:  
+systemctl reboot  
+systemctl start reboot.target  
+shutdown -r now  
 
 #### 1.4 プロセスの生成、監視、終了
 top: 現在実行中のプロセスを継続的に監視  
@@ -175,6 +179,10 @@ mycom1, mycom2, mycom3という3つのプロセス名のプロセスがあった
 killall mycom はダメで(正確なコマンド名を入力必要)、  
 pkill mycom はOK(3つのプロセスにシグナル送信する)  
 pkillはその文字列を含むプロセスに送るっぽい。  
+
+kill: プロセスIDまたはジョブ番号  
+killall: (正確な)プロセス名  
+pkill: プロセス名(部分一致で可)  
 
 nohub: ログアウト後もプログラムを実行させる  
 
