@@ -93,6 +93,8 @@ modproveで -r, --remove のオプションでアンロード
 /dev/sda1: 1番目のディスクの、1番目のパーティション
 
 fdisk: MBR形式のパーティションの作成、削除、変更   
+fdisk -l (デバイス名) でパーティションテーブルの表示  
+fdisk (デバイス名) でコマンド形式の対話モード サブコマンドは以下  
 l: パーティションタイプを一覧表示  
 n: 作成  
 d: 削除  
@@ -143,6 +145,7 @@ mkswap (デバイス名もしくはファイル名)
 例）dd if=/dev/zero of=/tmp/swapfile bs=1M count=500  
 　chmod 600 /tmp/swapfile ※パーミッションは600に  
 　mkswap /tmp/swapfile  
+/etc/fstab に記述があれば、起動時に有効化される  
 
 swapon, swapoff: 作成したスワップ領域を有効、無効にする  
 
@@ -152,6 +155,7 @@ swapon, swapoff: 作成したスワップ領域を有効、無効にする
 | /dev/sda1 | /boot | ext3 | defaults | 1 | 2 |  
 
 UUID: デバイスごとのユニークなID  
+blkid, lsblkコマンドで確認できる  
 
 マウントオプション: (未記述)  
 

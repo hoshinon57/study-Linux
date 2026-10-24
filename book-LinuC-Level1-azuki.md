@@ -46,7 +46,7 @@ virshコマンド: 仮想マシンとハイパーバイザーの管理
 virsh create: XML形式のファイルから仮想マシンを作成  
 virsh list --all: 一覧表示 実行中でないものも含む  
 virsh list: 一覧表示 実行中のもの  
-virsh start (仮想マシン名): 仮想マシンを起動
+virsh start (仮想マシン名): 仮想マシンを起動  
 virsh shutdown (仮想マシン名): 仮想マシンを停止  
 virsh destroy (仮想マシン名): 強制停止  
 virsh console (仮想マシン名): 仮想マシン内のゲストOSのコンソールに接続 ^\] でホストOSに操作を戻す  
@@ -159,6 +159,11 @@ reboot は再起動
 systemctl reboot  
 systemctl start reboot.target  
 shutdown -r now  
+
+systemctl rescue にてレスキューモードに入った後、元に戻す方法:  
+^D  
+systemctl reboot  
+systemctl default  
 
 #### 1.4 プロセスの生成、監視、終了
 top: 現在実行中のプロセスを継続的に監視  
