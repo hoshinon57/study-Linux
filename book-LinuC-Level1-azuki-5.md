@@ -174,7 +174,7 @@ mount: ファイルシステムをマウント (省略時は自動で判別さ�
 
 マウントオプションのデフォルト指定: defaults (=async, auto, dev, exec, nouser, rw, suid)  
 
-mountコマンド(単体呼び出し)以外にも、/proc/mounts, /proc/self/mounts でも現在のマウント状況を確認可能  
+mountコマンド(単体呼び出し)以外にも、/proc/mounts, /proc/self/mounts /etc/mtab をcatで開くのでも現在のマウント状況を確認可能  
 
 umount: ファイルシステムをアンマウント  
 ⇒umount [オプション]  
